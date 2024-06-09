@@ -1,0 +1,15 @@
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\bin\Debug\net7.0\LeagueOfChampions.exe
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\bin\Debug\net7.0\LeagueOfChampions.deps.json
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\bin\Debug\net7.0\LeagueOfChampions.runtimeconfig.json
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\bin\Debug\net7.0\LeagueOfChampions.dll
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\bin\Debug\net7.0\LeagueOfChampions.pdb
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.csproj.AssemblyReference.cache
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.AssemblyInfoInputs.cache
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.AssemblyInfo.cs
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.csproj.CoreCompileInputs.cache
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.dll
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\refint\LeagueOfChampions.dll
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.pdb
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\LeagueOfChampions.genruntimeconfig.cache
+C:\Users\Dawid\RiderProjects\LeagueOfChampions\LeagueOfChampions\obj\Debug\net7.0\ref\LeagueOfChampions.dll
