@@ -1,12 +1,13 @@
 ﻿using LeagueOfChampions.champions;
 using LeagueOfChampions.champions.@base;
 
-namespace LeagueOfChampions;
+namespace LeagueOfChampions.managers;
 
-public class ChampionCreator {
+public static class ChampionCreator {
     public static List<Champion> CreateChampions(SubtitlesPrinter subtitlesPrinter) {
-        List<Champion> championsList = new List<Champion> {
-            new Dummy(subtitlesPrinter)
+        var championsList = new List<Champion> {
+            new Dummy(subtitlesPrinter),
+            new Ragen(subtitlesPrinter),
         };
 
         return championsList;

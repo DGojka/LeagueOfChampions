@@ -3,29 +3,27 @@
 namespace LeagueOfChampions;
 
 public class ChampionPicker {
-    private readonly List<Champion> champions;
-    private readonly SubtitlesPrinter subtitlesPrinter;
-    private const string GAREN = "Garen";
-    private const string RENGAR = "Rengar";
-    private const string RYZE = "Ryze";
-    private const string VLADIMIR = "Vladimir";
-    private const string UDYR = "Udyr";
+    private readonly List<Champion> _champions;
 
-    public ChampionPicker(List<Champion> champions, SubtitlesPrinter subtitlesPrinter) {
-        this.champions = champions;
-        this.subtitlesPrinter = subtitlesPrinter;
+    public ChampionPicker(List<Champion> champions) {
+        _champions = champions;
     }
 
     public Champion PickChampion() {
-        string? championName = Console.ReadLine();
-        Champion champion = FindChampionByName(championName);
-    //    champions.Remove(champion);
+        Champion? champion;
+        do {
+            var championName = Console.ReadLine();
+            champion = FindChampionByName(championName);
+        } while (champion == null);
+
+        _champions.Remove(champion);
         return champion;
     }
 
-    private Champion FindChampionByName(string? championName) {
-        foreach (Champion champion in champions) {
-            if (championName.Equals(champion.GetName())) {
+    private Champion? FindChampionByName(string? championName) {
+        foreach (var champion in _champions) {
+            if (championName != null &&
+                championName.ToLower().Equals(champion.GetName().ToLower())) {
                 return champion;
             }
         }
