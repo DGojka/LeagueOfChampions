@@ -25,7 +25,7 @@ public class Game {
             if (turnCount % 2 != 0) {
                 _roundCount++;
                 Console.Clear();
-                
+
                 ResetAbilities(championInMove, attackedChampion);
                 UsePassiveSpells(championInMove, attackedChampion);
                 PrintOnBeginningOfTheRound();
@@ -44,6 +44,7 @@ public class Game {
                 subtitlesPrinter.PrintHp(champion2);
                 subtitlesPrinter.PrintHp(champion1);
             }
+
             if (SomeChampionDied()) {
                 Champion winner = DetermineWinner();
                 subtitlesPrinter.PrintWinner(winner.GetName());
@@ -72,7 +73,7 @@ public class Game {
     private Champion DetermineWinner() {
         return champion1.GetHp() < champion2.GetHp() ? champion2 : champion1;
     }
-    
+
     private void ResetAbilities(Champion championInMove, Champion attackedChampion) {
         championInMove.ResetCurrentManaPoints();
         attackedChampion.ResetCurrentManaPoints();

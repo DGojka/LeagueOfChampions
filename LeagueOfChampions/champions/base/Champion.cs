@@ -29,7 +29,7 @@ namespace LeagueOfChampions.champions.@base {
         // Mana Points and Cooldowns
         protected int ManaPoints;
         protected int CurrentManaPoints;
-        
+
         protected int Armor;
         protected int AttackDamage;
 

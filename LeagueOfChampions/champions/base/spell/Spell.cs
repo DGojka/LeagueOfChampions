@@ -17,7 +17,3 @@ public class Spell {
         _spellListener();
     }
 }
-
-public interface ISpellListener {
-    void OnSpellUsed();
-}

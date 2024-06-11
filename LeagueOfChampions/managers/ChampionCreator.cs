@@ -1,5 +1,6 @@
 ﻿using LeagueOfChampions.champions;
 using LeagueOfChampions.champions.@base;
+using LeagueOfChampions.champions.ragen;
 
 namespace LeagueOfChampions.managers;
 
