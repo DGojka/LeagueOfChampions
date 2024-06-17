@@ -21,7 +21,7 @@ public static class RagenConstants {
     public const int QDamage = ATTACK_DAMAGE * 3;
 
     //W
-    public const int WArmorGain = 2;
+    public const int WArmorGain = 5;
 
     //E
     public const int SingleSpinDamage = 7;

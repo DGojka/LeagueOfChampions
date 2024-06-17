@@ -4,14 +4,17 @@ namespace LeagueOfChampions.champions.@base {
     public abstract class Champion : ISpellProvider {
         protected readonly SubtitlesPrinter SubtitlesPrinter;
         public string Name { get; protected init; }
+        public SpellsExplanation SpellsExplanation { get; protected init; }
 
         // HP
         protected int MaxHp { get; init; }
+
         public float CurrentHp { get; protected set; }
+
         // Mana Points and Cooldowns
         protected int ManaPoints { get; init; }
         public int CurrentManaPoints { get; protected set; }
-        
+
         protected int Armor { get; set; }
         protected int AttackDamage { get; set; }
 
