@@ -3,35 +3,17 @@
 namespace LeagueOfChampions.champions.@base {
     public abstract class Champion : ISpellProvider {
         protected readonly SubtitlesPrinter SubtitlesPrinter;
-        protected string Name;
-
-        // Getters, Setters
-        public string GetName() {
-            return Name;
-        }
-
-        public float GetHp() {
-            return CurrentHp;
-        }
-
-        public int GetCurrentManaPoints() {
-            return CurrentManaPoints;
-        }
-
-        public override string ToString() {
-            return Name;
-        }
+        public string Name { get; protected init; }
 
         // HP
-        protected int MaxHp;
-        protected int CurrentHp;
-
+        protected int MaxHp { get; init; }
+        public float CurrentHp { get; protected set; }
         // Mana Points and Cooldowns
-        protected int ManaPoints;
-        protected int CurrentManaPoints;
-
-        protected int Armor;
-        protected int AttackDamage;
+        protected int ManaPoints { get; init; }
+        public int CurrentManaPoints { get; protected set; }
+        
+        protected int Armor { get; set; }
+        protected int AttackDamage { get; set; }
 
         protected Spell? BasicAttack;
         protected Spell? SpellQ;
@@ -47,9 +29,8 @@ namespace LeagueOfChampions.champions.@base {
         public abstract Spell? ProvideR();
         public abstract Spell ProvidePassive();
 
-        protected Champion(SubtitlesPrinter subtitlesPrinter, string name) {
+        protected Champion(SubtitlesPrinter subtitlesPrinter) {
             SubtitlesPrinter = subtitlesPrinter;
-            Name = name;
         }
 
         public void ReceiveSpell(SpellDescription description) {
@@ -125,6 +106,10 @@ namespace LeagueOfChampions.champions.@base {
             if (SpellR != null) SpellR.IsSpellOnCooldown = false;
         }
 
+        public override string ToString() {
+            return Name;
+        }
+
         private int CalculateDamageDealt(int attackDamage, int relativeArmor,
             bool isDamageByMissingHp, bool isTrueDamage) {
             int damageDealt;
@@ -163,7 +148,7 @@ namespace LeagueOfChampions.champions.@base {
         }
 
         private int GetHpPercentage() {
-            return CurrentHp / MaxHp;
+            return (int)(CurrentHp / MaxHp);
         }
     }
 }

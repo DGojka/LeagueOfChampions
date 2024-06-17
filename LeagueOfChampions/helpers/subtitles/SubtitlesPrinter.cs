@@ -21,7 +21,7 @@ public class SubtitlesPrinter {
     }
 
     public void PrintHp(Champion champion) {
-        Println(champion.GetType().Name + ": " + champion.GetHp() + " hp");
+        Println(champion.GetType().Name + ": " + champion.CurrentHp + " hp");
     }
 
     public void PrintWinner(string championName) {
@@ -32,6 +32,8 @@ public class SubtitlesPrinter {
         Println("Remaining action points: " + actionPoints);
     }
 
+    
+    //PRE-game
     public void PrintChampionList(List<Champion> champions) {
         Println("List of the Champions: " + string.Join(", ", champions));
     }
@@ -48,13 +50,17 @@ public class SubtitlesPrinter {
         Console.WriteLine("You've chosen " + championName);
     }
 
+    public void AskForChampionPick() {
+        Println("Pick a champion by typing its name!");
+    }
+    
     //CHAMPION SECTION
     public void SpellOnCooldown() {
         Println("Your spell is on cooldown! Wait for the next round.");
     }
 
     public void DamageTaken(string victimName, int damageTaken) {
-        Println(victimName + "has suffered " + damageTaken + ". ");
+        Println(victimName + " has suffered " + damageTaken + " damage. ");
     }
 
     //GAREN

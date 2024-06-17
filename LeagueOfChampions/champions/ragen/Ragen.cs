@@ -6,8 +6,8 @@ namespace LeagueOfChampions.champions.ragen;
 public class Ragen : Champion {
     private readonly SubtitlesPrinter _subtitlesPrinter;
 
-    public Ragen(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter,
-        RagenConstants.RAGEN) {
+    public Ragen(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter) {
+        Name = RagenConstants.RAGEN;
         MaxHp = RagenConstants.MAX_HP;
         CurrentHp = RagenConstants.MAX_HP;
         Armor = RagenConstants.ARMOR;

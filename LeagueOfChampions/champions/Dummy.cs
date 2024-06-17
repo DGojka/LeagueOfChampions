@@ -10,7 +10,8 @@ public class Dummy : Champion {
     private const int ARMOR = 10;
     private const int MAX_AD = 20;
 
-    public Dummy(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter,DUMMY) {
+    public Dummy(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter) {
+        Name = DUMMY;
         MaxHp = MAX_HP;
         CurrentHp = MAX_HP;
         Armor = ARMOR;

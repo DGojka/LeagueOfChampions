@@ -1,4 +1,4 @@
-﻿namespace LeagueOfChampions.champions; 
+﻿namespace LeagueOfChampions.champions.ragen; 
 
 public static class RagenConstants {
     public const string RAGEN = "Ragen";
