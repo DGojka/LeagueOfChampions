@@ -3,39 +3,17 @@
 namespace LeagueOfChampions.champions.@base {
     public abstract class Champion : ISpellProvider {
         protected readonly SubtitlesPrinter SubtitlesPrinter;
+        public string Name { get; protected init; }
 
-        protected string Name;
-
-        // Getters, Setters
-        public string GetName() {
-            return Name;
-        }
-
-        public float GetHp() {
-            return CurrentHp;
-        }
-
-        public int GetCurrentManaPoints() {
-            return CurrentManaPoints;
-        }
-
-        public override string ToString() {
-            return Name;
-        }
         // HP
-        protected int MaxHp;
-        protected int CurrentHp;
-
+        protected int MaxHp { get; init; }
+        public float CurrentHp { get; protected set; }
         // Mana Points and Cooldowns
-        protected int ManaPoints;
-        protected int CurrentManaPoints;
-
-        // Defense
-        protected int Armor;
-
-        // Damage
-        protected int AttackDamage;
-        protected float ArmorPenetration;
+        protected int ManaPoints { get; init; }
+        public int CurrentManaPoints { get; protected set; }
+        
+        protected int Armor { get; set; }
+        protected int AttackDamage { get; set; }
 
         protected Spell? BasicAttack;
         protected Spell? SpellQ;
@@ -56,75 +34,63 @@ namespace LeagueOfChampions.champions.@base {
         }
 
         public void ReceiveSpell(SpellDescription description) {
-            int relativeArmor =
-                (int)((Armor * (1 - description.ArmorPen * 0.01)) / 2);
-            relativeArmor = relativeArmor == 0 ? 1 : relativeArmor;
-            if (description.DamageByMissingHp && description.TrueDmg) {
-                int damageByMissingHp = (int)(description.AttackDamage *
-                                              (1.1 - GetHpPercentage()));
-                CurrentHp -= damageByMissingHp;
-            } else if (description.DamageByMissingHp) {
-                int adDamageByMissingHp = (int)(description.AttackDamage *
-                                                (1.1 - GetHpPercentage()));
-                CurrentHp -= adDamageByMissingHp / relativeArmor;
-            } else {
-                if (description.TrueDmg) {
-                    CurrentHp -= description.AttackDamage;
-                } else {
-                    CurrentHp -= description.AttackDamage / relativeArmor;
-                }
+            var damageTaken = CalculateDamageDealt(description.Damage, Armor,
+                description.IsDamageByMissingHp, description.IsTrueDmg);
+            CurrentHp -= damageTaken;
+            if (damageTaken > 0) {
+                SubtitlesPrinter.DamageTaken(Name, damageTaken);
             }
         }
 
         public Spell? BaseAttackHandler() {
-            Spell? aa = ProvideBasicAttack();
+            var basicAttack = ProvideBasicAttack();
             if (BasicAttack != null)
                 CurrentManaPoints -= BasicAttack.ManaPointsCost;
-            return aa;
+            return basicAttack;
         }
 
         public Spell? SpellQHandler() {
-            Spell? spell = ProvideQ();
+            var spell = ProvideQ();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
                 return spell;
-            } else {
-                SubtitlesPrinter.SpellOnCooldown();
-                return new Spell(new SpellDescription(), 0, () => { });
             }
+
+            SubtitlesPrinter.SpellOnCooldown();
+            return new Spell(new SpellDescription(), 0, () => { });
         }
 
         public Spell? SpellWHandler() {
-            Spell? spell = ProvideW();
+            var spell = ProvideW();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
                 return spell;
-            } else {
-                SubtitlesPrinter.SpellOnCooldown();
-                return new Spell(new SpellDescription(), 0, () => { });
             }
+
+            SubtitlesPrinter.SpellOnCooldown();
+            return new Spell(new SpellDescription(), 0, () => { });
         }
 
         public Spell? SpellEHandler() {
-            Spell? spell = ProvideE();
+            var spell = ProvideE();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
                 return spell;
-            } else {
-                SubtitlesPrinter.SpellOnCooldown();
-                return new Spell(new SpellDescription(), 0, () => { });
             }
+
+            SubtitlesPrinter.SpellOnCooldown();
+            return new Spell(new SpellDescription(), 0, () => { });
         }
 
         public Spell? SpellRHandler() {
-            Spell? spell = ProvideR();
+            var spell = ProvideR();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
                 return spell;
-            } else {
-                SubtitlesPrinter.SpellOnCooldown();
-                return new Spell(new SpellDescription(), 0, () => { });
             }
+
+            SubtitlesPrinter.SpellOnCooldown();
+            return new Spell(new SpellDescription(), 0, () => { });
         }
 
         // Reset
@@ -140,6 +106,36 @@ namespace LeagueOfChampions.champions.@base {
             if (SpellR != null) SpellR.IsSpellOnCooldown = false;
         }
 
+        public override string ToString() {
+            return Name;
+        }
+
+        private int CalculateDamageDealt(int attackDamage, int relativeArmor,
+            bool isDamageByMissingHp, bool isTrueDamage) {
+            int damageDealt;
+            switch (isDamageByMissingHp) {
+                case true when isTrueDamage: {
+                    damageDealt = (int)(attackDamage * (1.1 - GetHpPercentage()));
+                    break;
+                }
+                case true: {
+                    damageDealt = (int)(attackDamage * (1.1 - GetHpPercentage())) / relativeArmor;
+                    break;
+                }
+                default: {
+                    if (isTrueDamage) {
+                        damageDealt = attackDamage;
+                    } else {
+                        damageDealt = attackDamage / relativeArmor;
+                    }
+
+                    break;
+                }
+            }
+
+            return damageDealt;
+        }
+
         private bool SpellCanBeUsed(Spell? spell) {
             return spell is { IsSpellOnCooldown: false } &&
                    CurrentManaPoints >= spell.ManaPointsCost;
@@ -152,7 +148,7 @@ namespace LeagueOfChampions.champions.@base {
         }
 
         private int GetHpPercentage() {
-            return CurrentHp / MaxHp;
+            return (int)(CurrentHp / MaxHp);
         }
     }
 }

@@ -7,7 +7,7 @@ public class Dummy : Champion {
     private const string DUMMY = "DUMMY";
     private const int MAX_HP = 500;
     private const int MAX_MANA = 4;
-    private const int ARMOR = 40;
+    private const int ARMOR = 10;
     private const int MAX_AD = 20;
 
     public Dummy(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter) {
@@ -17,7 +17,6 @@ public class Dummy : Champion {
         Armor = ARMOR;
         AttackDamage = MAX_AD;
         ManaPoints = MAX_MANA;
-        ArmorPenetration = 0;
         CurrentManaPoints = ManaPoints;
     }
 
