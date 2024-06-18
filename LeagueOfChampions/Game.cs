@@ -58,14 +58,6 @@ public class Game {
         }
     }
 
-    private void HandleOtherKeyOptions(KeyType key, Champion championInMove) {
-        switch (key) {
-            case KeyType.INFO:
-                subtitlesPrinter.PrintChampionInfo(championInMove.SpellsExplanation);
-                break;
-        }
-    }
-
     private Spell GetSpell(Champion champion, KeyType key) {
         Spell? spell;
         do {
@@ -81,11 +73,7 @@ public class Game {
 
         return spell;
     }
-
-    private bool isSpellKey(KeyType key) {
-        return key != KeyType.INFO && key != KeyType.UNKNOWN;
-    }
-
+    
     private void SetupNewRound(Champion championInMove, Champion attackedChampion) {
         _roundCount++;
         Console.Clear();
