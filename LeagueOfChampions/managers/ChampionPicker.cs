@@ -12,6 +12,7 @@ public class ChampionPicker {
     }
 
     public (Champion, Champion) PickChampions() {
+        subtitlesPrinter.AskForChampionPick();
         subtitlesPrinter.PrintChampionList(_champions);
         subtitlesPrinter.PrintPlayerToPickNumber(1);
         var champion1 = PickChampion();

@@ -29,24 +29,38 @@ public class Game {
 
             while (!IsTurnOver(championInMove, attackedChampion)) {
                 subtitlesPrinter.PrintActionPoints(championInMove.CurrentManaPoints);
-                var spell = GetSpell(championInMove);
-                spell.Use();
-                attackedChampion.ReceiveSpell(spell.SpellDescription);
-                PrintChampionsHp();
+                subtitlesPrinter.PrintTypeHelp();
+                KeyType key = KeyboardManager.GetKey();
+                HandleKeyResult(key, championInMove, attackedChampion);
             }
 
             (championInMove, attackedChampion) = (attackedChampion, championInMove);
         }
+
         var winner = DetermineWinner();
         subtitlesPrinter.PrintWinner(winner.Name);
     }
 
+    private void HandleKeyResult(KeyType key, Champion championInMove, Champion attackedChampion) {
+        switch (key) {
+            case KeyType.INFO:
+                subtitlesPrinter.PrintChampionInfo(championInMove.SpellsExplanation);
+                break;
+            case KeyType.UNKNOWN:
+                subtitlesPrinter.PrintWrongKey();
+                break;
+            default:
+                Spell spell = GetSpell(championInMove, key);
+                spell.Use();
+                attackedChampion.ReceiveSpell(spell.SpellDescription);
+                PrintChampionsHp();
+                break;
+        }
+    }
 
-    private Spell GetSpell(Champion champion) {
+    private Spell GetSpell(Champion champion, KeyType key) {
         Spell? spell;
         do {
-            var key = KeyboardManager.GetKey();
-
             spell = key switch {
                 KeyType.T => champion.BaseAttackHandler(),
                 KeyType.Q => champion.SpellQHandler(),
@@ -59,7 +73,7 @@ public class Game {
 
         return spell;
     }
-
+    
     private void SetupNewRound(Champion championInMove, Champion attackedChampion) {
         _roundCount++;
         Console.Clear();

@@ -1,4 +1,5 @@
 ﻿using LeagueOfChampions.champions.@base;
+using LeagueOfChampions.spell;
 
 namespace LeagueOfChampions;
 
@@ -32,7 +33,7 @@ public class SubtitlesPrinter {
         Println("Remaining action points: " + actionPoints);
     }
 
-    
+
     //PRE-game
     public void PrintChampionList(List<Champion> champions) {
         Println("List of the Champions: " + string.Join(", ", champions));
@@ -53,7 +54,7 @@ public class SubtitlesPrinter {
     public void AskForChampionPick() {
         Println("Pick a champion by typing its name!");
     }
-    
+
     //CHAMPION SECTION
     public void SpellOnCooldown() {
         Println("Your spell is on cooldown! Wait for the next round.");
@@ -79,5 +80,23 @@ public class SubtitlesPrinter {
 
     private void Println(string text) {
         Console.WriteLine(text);
+    }
+
+    public void PrintChampionInfo(SpellsExplanation spellsExplanation) {
+        Println("================== CHAMPION INFO ==================");
+        Println($"• Type 'Q' for: {spellsExplanation.GetQExplanation()} ");
+        Println($"• Type 'W' for: {spellsExplanation.GetWExplanation()} ");
+        Println($"• Type 'E' for: {spellsExplanation.GetEExplanation()} ");
+        Println($"• Type 'R' for: {spellsExplanation.GetRExplanation()} ");
+        Println("• Type 'T' for: basic attack. Mana cost: 1 ");
+        Println("===================================================");
+    }
+
+    public void PrintWrongKey() {
+        Println("Wrong key! Try again");
+    }
+
+    public void PrintTypeHelp() {
+        Println("Type 'help' for more information.");
     }
 }

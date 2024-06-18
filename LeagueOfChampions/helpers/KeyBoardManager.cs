@@ -13,6 +13,7 @@ public static class KeyboardManager
             "W" => KeyType.W,
             "E" => KeyType.E,
             "R" => KeyType.R,
+            "HELP" => KeyType.INFO,
             _ => KeyType.UNKNOWN,
         };
     }
@@ -25,5 +26,6 @@ public enum KeyType
     W,
     E,
     R,
+    INFO,
     UNKNOWN
 }
