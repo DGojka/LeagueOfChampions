@@ -29,17 +29,9 @@ public class Game {
 
             while (!IsTurnOver(championInMove, attackedChampion)) {
                 subtitlesPrinter.PrintActionPoints(championInMove.CurrentManaPoints);
-
-                KeyType key;
-                Spell? spell = null;
-                do {
-                    key = KeyboardManager.GetKey();
-                    HandleOtherKeyOptions(key,championInMove);
-                } while (!isSpellKey(key));
-
-                spell?.Use();
-                attackedChampion.ReceiveSpell(spell.SpellDescription);
-                PrintChampionsHp();
+                subtitlesPrinter.PrintTypeHelp();
+                KeyType key = KeyboardManager.GetKey();
+                HandleKeyResult(key, championInMove, attackedChampion);
             }
 
             (championInMove, attackedChampion) = (attackedChampion, championInMove);
@@ -49,16 +41,29 @@ public class Game {
         subtitlesPrinter.PrintWinner(winner.Name);
     }
 
-    private void HandleOtherKeyOptions(KeyType key, Champion championInMove) {
+    private void HandleKeyResult(KeyType key, Champion championInMove, Champion attackedChampion) {
         switch (key) {
             case KeyType.INFO:
-                Console.WriteLine("INFO key pressed. Please select a valid spell key.");
+                subtitlesPrinter.PrintChampionInfo(championInMove.SpellsExplanation);
+                break;
+            case KeyType.UNKNOWN:
+                subtitlesPrinter.PrintWrongKey();
+                break;
+            default:
+                Spell spell = GetSpell(championInMove, key);
+                spell.Use();
+                attackedChampion.ReceiveSpell(spell.SpellDescription);
+                PrintChampionsHp();
                 break;
         }
     }
 
-    private KeyType GetKey() {
-        throw new NotImplementedException();
+    private void HandleOtherKeyOptions(KeyType key, Champion championInMove) {
+        switch (key) {
+            case KeyType.INFO:
+                subtitlesPrinter.PrintChampionInfo(championInMove.SpellsExplanation);
+                break;
+        }
     }
 
     private Spell GetSpell(Champion champion, KeyType key) {

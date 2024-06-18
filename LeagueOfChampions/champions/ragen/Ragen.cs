@@ -15,6 +15,7 @@ public class Ragen : Champion {
         ManaPoints = RagenConstants.MAX_MANA;
         CurrentManaPoints = ManaPoints;
         _subtitlesPrinter = subtitlesPrinter;
+        SpellsExplanation = new RagenSpellsExplanation();
     }
 
     public override Spell ProvideBasicAttack() {

@@ -18,6 +18,7 @@ public class Dummy : Champion {
         AttackDamage = MAX_AD;
         ManaPoints = MAX_MANA;
         CurrentManaPoints = ManaPoints;
+        SpellsExplanation = new DummySpellsExplanation();
     }
 
     public override Spell? ProvideBasicAttack() {

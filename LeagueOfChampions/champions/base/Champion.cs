@@ -2,9 +2,9 @@
 
 namespace LeagueOfChampions.champions.@base {
     public abstract class Champion : ISpellProvider {
-        protected readonly SubtitlesPrinter SubtitlesPrinter;
+        private readonly SubtitlesPrinter SubtitlesPrinter;
         public string Name { get; protected init; }
-        public SpellsExplanation SpellsExplanation { get; protected init; }
+        public SpellsExplanation SpellsExplanation { get; protected set; }
 
         // HP
         protected int MaxHp { get; init; }

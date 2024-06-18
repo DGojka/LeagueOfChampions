@@ -2,9 +2,9 @@
 
 namespace LeagueOfChampions.champions.ragen;
 
-public class RagenSpellExplanation : SpellsExplanation {
+public class RagenSpellsExplanation : SpellsExplanation {
     public string GetQExplanation() {
-        return $"Ragen attacks and deals 3x damage. Mana cost: {RagenConstants.QManaCost}";
+        return $"Ragen attacks and deals 3x basic attack damage. Mana cost: {RagenConstants.QManaCost}";
     }
 
     public string GetWExplanation() {
@@ -20,7 +20,7 @@ public class RagenSpellExplanation : SpellsExplanation {
 
     public string GetRExplanation() {
         return
-            $"Ragen pierces the opponent's armor with his sword and inflicts damage based on target's missing hp. " +
+            $"Ragen pierces the opponent's armor and inflicts damage based on target's missing hp. " +
             $"Mana cost: {RagenConstants.RManaCost}";
     }
 }

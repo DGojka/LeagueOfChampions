@@ -13,7 +13,7 @@ public static class KeyboardManager
             "W" => KeyType.W,
             "E" => KeyType.E,
             "R" => KeyType.R,
-            "info" => KeyType.INFO,
+            "HELP" => KeyType.INFO,
             _ => KeyType.UNKNOWN,
         };
     }
