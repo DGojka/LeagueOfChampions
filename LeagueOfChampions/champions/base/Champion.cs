@@ -108,11 +108,16 @@ namespace LeagueOfChampions.champions.@base {
             if (SpellE != null) SpellE.IsSpellOnCooldown = false;
             if (SpellR != null) SpellR.IsSpellOnCooldown = false;
         }
-
+        
         public override string ToString() {
             return Name;
         }
-
+        protected static void ResetCooldown(Spell? spell) {
+            if(spell !=null) {
+                spell.IsSpellOnCooldown = false;
+            }
+        }
+        
         private int CalculateDamageDealt(int attackDamage, int relativeArmor,
             bool isDamageByMissingHp, bool isTrueDamage) {
             int damageDealt;
