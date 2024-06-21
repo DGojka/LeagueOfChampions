@@ -4,7 +4,7 @@ public class MathHelper
 {
     public static int RandomInt(int min, int max)
     {
-        Random random = new Random();
+        var random = new Random();
         return random.Next(min, max);
     }
 

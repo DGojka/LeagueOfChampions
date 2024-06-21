@@ -45,14 +45,14 @@ namespace LeagueOfChampions.champions.@base {
             }
         }
 
-        public Spell? BaseAttackHandler() {
+        public Spell? HandleBasicAttack() {
             var basicAttack = ProvideBasicAttack();
             if (BasicAttack != null)
                 CurrentManaPoints -= BasicAttack.ManaPointsCost;
             return basicAttack;
         }
 
-        public Spell? SpellQHandler() {
+        public Spell? HandleSpellQ() {
             var spell = ProvideQ();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
@@ -63,7 +63,7 @@ namespace LeagueOfChampions.champions.@base {
             return new Spell(new SpellDescription(), 0, () => { });
         }
 
-        public Spell? SpellWHandler() {
+        public Spell? HandleSpellW() {
             var spell = ProvideW();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
@@ -74,7 +74,7 @@ namespace LeagueOfChampions.champions.@base {
             return new Spell(new SpellDescription(), 0, () => { });
         }
 
-        public Spell? SpellEHandler() {
+        public Spell? HandleSpellE() {
             var spell = ProvideE();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);
@@ -85,7 +85,7 @@ namespace LeagueOfChampions.champions.@base {
             return new Spell(new SpellDescription(), 0, () => { });
         }
 
-        public Spell? SpellRHandler() {
+        public Spell? HandleSpellR() {
             var spell = ProvideR();
             if (SpellCanBeUsed(spell)) {
                 UseManaAndCooldown(spell);

@@ -18,7 +18,7 @@ public class RayZ : Champion {
         SpellsExplanation = new RayZSpellsExplanation();
     }
 
-    private bool isMarkUsed = false;
+    private bool _isMarkUsed;
 
     public override Spell? ProvideBasicAttack() {
         return BasicAttack ??=
@@ -28,14 +28,44 @@ public class RayZ : Champion {
     }
 
     public override Spell? ProvideQ() {
-        var damage = isMarkUsed ? RayZConstants.QMarkedDamage : RayZConstants.QBaseDamage;
+        var damage = _isMarkUsed ? RayZConstants.QMarkedDamage : RayZConstants.QBaseDamage;
         return new Spell(new SpellDescription(damage, false, false), RayZConstants.QManaCost,
-            () => { isMarkUsed = false; });
+            () => { _isMarkUsed = false; });
     }
 
     public override Spell? ProvideW() {
-        // todo some random 5 usages, for example reset Q cooldown or gain mana/ap
-        throw new NotImplementedException();
+        return new Spell(new SpellDescription(), RayZConstants.WManaCost, () => {
+            {
+                int randomNumber = MathHelper.RandomInt(1, 6);
+                switch (randomNumber) {
+                    case 1:
+                        AttackDamage += RayZConstants.WDamageGain;
+                        _subtitlesPrinter.RayZGainsAd();
+                        break;
+                    case 2:
+                        _isMarkUsed = true;
+                        _subtitlesPrinter.EnemyMarked();
+                        break;
+                    case 3:
+                        Armor += RayZConstants.WArmorGain;
+                        _subtitlesPrinter.RayZGainedArmor();
+                        break;
+                    case 4:
+                        ResetCooldown(SpellE);
+                        CurrentManaPoints++;
+                        _subtitlesPrinter.RayZResetECooldown();
+                        _subtitlesPrinter.RayZGainsManaPoint();
+                        break;
+                    case 5:
+                        CurrentManaPoints++;
+                        _subtitlesPrinter.RayZGainsManaPoint();
+                        break;
+                    case 6:
+                        _subtitlesPrinter.RayZBurnedScroll();
+                        break;
+                }
+            }
+        });
     }
 
     public override Spell? ProvideE() {
@@ -43,18 +73,28 @@ public class RayZ : Champion {
             new Spell(
                 new SpellDescription(RayZConstants.EDamage, false, false),
                 RayZConstants.EManaCost, () => {
-                    isMarkUsed = true;
+                    _isMarkUsed = true;
                     ResetCooldown(SpellQ);
                 });
     }
 
     public override Spell? ProvideR() {
-        //todo usage?
-        throw new NotImplementedException();
+        return SpellR ??=
+            new Spell(
+                new SpellDescription(),
+                CurrentManaPoints, () => {
+                    CurrentManaPoints = ManaPoints;
+                });
     }
 
     public override Spell ProvidePassive() {
-        //todo gain bonus attack damage each round
-        throw new NotImplementedException();
+        return PassiveSpell ??=
+            new Spell(
+                new SpellDescription(),
+                0, () => {
+                    int gainedAd = MathHelper.RandomInt(1, 5);
+                    AttackDamage += gainedAd;
+                    _subtitlesPrinter.RayZPrintPassive(gainedAd);
+                });
     }
 }

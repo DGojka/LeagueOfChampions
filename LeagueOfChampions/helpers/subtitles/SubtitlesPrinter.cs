@@ -1,4 +1,5 @@
-﻿using LeagueOfChampions.champions.@base;
+﻿using LeagueOfChampions.champions;
+using LeagueOfChampions.champions.@base;
 using LeagueOfChampions.spell;
 
 namespace LeagueOfChampions;
@@ -29,8 +30,8 @@ public class SubtitlesPrinter {
         Println(championName + " has won!");
     }
 
-    public void PrintActionPoints(int actionPoints) {
-        Println("Remaining action points: " + actionPoints);
+    public void PrintManaPoints(int manaPoints) {
+        Println("Remaining mana points: " + manaPoints);
     }
 
 
@@ -57,20 +58,50 @@ public class SubtitlesPrinter {
 
     //CHAMPION SECTION
     public void SpellOnCooldown() {
-        Println("Your spell is on cooldown! Wait for the next round.");
+        Println("Your spell is on cooldown or you might have not enough mana points! Wait for the next round.");
     }
 
     public void DamageTaken(string victimName, int damageTaken) {
         Println(victimName + " has suffered " + damageTaken + " damage. ");
     }
 
-    //GAREN
+    //RAGEN
     public void RagenPrintPassive(int regeneratedHp) {
-        Println("Perseverance: Garen regenerated " + regeneratedHp + "HP.");
+        Println("Perseverance: Ragen regenerated " + regeneratedHp + "HP.");
     }
 
     public void RagenPrintSpinsCount(int spins) {
         Println("Ragen spun " + spins + " times.");
+    }
+
+    //RayZ
+    public void RayZPrintPassive(int gainedDamage) {
+        Console.WriteLine(
+            $"Arcane Mastery: RayZ reads the ancient scrolls gaining {gainedDamage} Attack damage.");
+    }
+
+    public void EnemyMarked() {
+        Console.WriteLine("RayZ: ENEMY IS MARKED. Your next Q will deal bonus damage.");
+    }
+
+    public void RayZGainedArmor() {
+        Console.WriteLine($"RayZ: gained {RayZConstants.WArmorGain} Armor ");
+    }
+
+    public void RayZResetECooldown() {
+        Console.WriteLine("RayZ: E COOLDOWN HAS BEEN RESET!");
+    }
+
+    public void RayZGainsManaPoint() {
+        Console.WriteLine("RayZ: Gained additional Action Point for this round.");
+    }
+
+    public void RayZGainsAd() {
+        Console.WriteLine($"RayZ: gained {RayZConstants.WDamageGain} AD.");
+    }
+
+    public void RayZBurnedScroll() {
+        Console.WriteLine("RayZ: The scroll has burned out. Nothing happens.");
     }
 
     //OTHERS

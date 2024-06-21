@@ -9,6 +9,7 @@ public static class ChampionCreator {
         var championsList = new List<Champion> {
             new Dummy(subtitlesPrinter),
             new Ragen(subtitlesPrinter),
+            new RayZ(subtitlesPrinter),
         };
 
         return championsList;

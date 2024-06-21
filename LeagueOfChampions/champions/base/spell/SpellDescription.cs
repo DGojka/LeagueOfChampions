@@ -1,9 +1,9 @@
 ﻿namespace LeagueOfChampions.spell;
 
 public class SpellDescription {
-    public int Damage { get; set; }
-    public bool IsTrueDmg { get; set; }
-    public bool IsDamageByMissingHp { get; set; }
+    public int Damage { get; }
+    public bool IsTrueDmg { get; }
+    public bool IsDamageByMissingHp { get; }
 
     public SpellDescription(int damage, bool isTrueDmg, bool isDamageByMissingHp) {
         Damage = damage;
