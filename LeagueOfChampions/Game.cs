@@ -8,6 +8,8 @@ public class Game {
     private readonly Champion champion2;
     private int _roundCount;
     private readonly SubtitlesPrinter subtitlesPrinter;
+    private int PrintHelpMaxCount = 6;
+    private int printHelpCount = 0;
 
     public Game(Champion champion1, Champion champion2, SubtitlesPrinter subtitlesPrinter) {
         this.subtitlesPrinter = subtitlesPrinter;
@@ -28,8 +30,7 @@ public class Game {
             }
 
             while (!IsTurnOver(championInMove, attackedChampion)) {
-                subtitlesPrinter.PrintActionPoints(championInMove.CurrentManaPoints);
-                subtitlesPrinter.PrintTypeHelp();
+                subtitlesPrinter.PrintManaPoints(championInMove.CurrentManaPoints);
                 KeyType key = KeyboardManager.GetKey();
                 HandleKeyResult(key, championInMove, attackedChampion);
             }
@@ -53,7 +54,6 @@ public class Game {
                 Spell spell = GetSpell(championInMove, key);
                 spell.Use();
                 attackedChampion.ReceiveSpell(spell.SpellDescription);
-                PrintChampionsHp();
                 break;
         }
     }
@@ -62,18 +62,18 @@ public class Game {
         Spell? spell;
         do {
             spell = key switch {
-                KeyType.T => champion.BaseAttackHandler(),
-                KeyType.Q => champion.SpellQHandler(),
-                KeyType.W => champion.SpellWHandler(),
-                KeyType.E => champion.SpellEHandler(),
-                KeyType.R => champion.SpellRHandler(),
+                KeyType.T => champion.HandleBasicAttack(),
+                KeyType.Q => champion.HandleSpellQ(),
+                KeyType.W => champion.HandleSpellW(),
+                KeyType.E => champion.HandleSpellE(),
+                KeyType.R => champion.HandleSpellR(),
                 _ => null,
             };
         } while (spell == null);
 
         return spell;
     }
-    
+
     private void SetupNewRound(Champion championInMove, Champion attackedChampion) {
         _roundCount++;
         Console.Clear();
@@ -118,11 +118,14 @@ public class Game {
     }
 
     private void PrintOnBeginningOfTheRound() {
-        subtitlesPrinter.PrintHp(champion1);
-        subtitlesPrinter.PrintHp(champion2);
+        PrintChampionsHp();
         subtitlesPrinter.PrintEnter(1);
         subtitlesPrinter.PrintRoundCount(_roundCount);
         subtitlesPrinter.PrintEnter(1);
         subtitlesPrinter.PrintTurn(champion1.Name);
+        if (printHelpCount < PrintHelpMaxCount) {
+            subtitlesPrinter.PrintTypeHelp();
+            printHelpCount++;
+        }
     }
 }
