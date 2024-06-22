@@ -38,6 +38,7 @@ public class Game {
             (championInMove, attackedChampion) = (attackedChampion, championInMove);
         }
 
+        PrintChampionsHp();
         var winner = DetermineWinner();
         subtitlesPrinter.PrintWinner(winner.Name);
     }

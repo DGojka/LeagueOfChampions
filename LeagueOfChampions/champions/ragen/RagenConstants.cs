@@ -6,7 +6,7 @@ public static class RagenConstants {
     //stats
     public const int MAX_HP = 80;
     public const int ATTACK_DAMAGE = 40;
-    public const int ARMOR = 40;
+    public const int ARMOR = 30;
     public const int MAX_MANA = 4;
 
     //mana costs

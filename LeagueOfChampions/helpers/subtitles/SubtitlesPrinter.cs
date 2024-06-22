@@ -49,7 +49,7 @@ public class SubtitlesPrinter {
     }
 
     public void PrintChosenChampion(string championName) {
-        Console.WriteLine("You've chosen " + championName);
+        Println("You've chosen " + championName);
     }
 
     public void AskForChampionPick() {
@@ -58,7 +58,8 @@ public class SubtitlesPrinter {
 
     //CHAMPION SECTION
     public void SpellOnCooldown() {
-        Println("Your spell is on cooldown or you might have not enough mana points! Wait for the next round.");
+        Println(
+            "Your spell is on cooldown or you might have not enough mana points! Wait for the next round.");
     }
 
     public void DamageTaken(string victimName, int damageTaken) {
@@ -76,32 +77,60 @@ public class SubtitlesPrinter {
 
     //RayZ
     public void RayZPrintPassive(int gainedDamage) {
-        Console.WriteLine(
+        Println(
             $"Arcane Mastery: RayZ reads the ancient scrolls gaining {gainedDamage} Attack damage.");
     }
 
     public void EnemyMarked() {
-        Console.WriteLine("RayZ: ENEMY IS MARKED. Your next Q will deal bonus damage.");
+        Println("RayZ: ENEMY IS MARKED. Your next Q will deal bonus damage.");
     }
 
     public void RayZGainedArmor() {
-        Console.WriteLine($"RayZ: gained {RayZConstants.WArmorGain} Armor ");
+        Println($"RayZ: gained {RayZConstants.WArmorGain} Armor ");
     }
 
     public void RayZResetECooldown() {
-        Console.WriteLine("RayZ: E COOLDOWN HAS BEEN RESET!");
+        Println("RayZ: E COOLDOWN HAS BEEN RESET!");
     }
 
     public void RayZGainsManaPoint() {
-        Console.WriteLine("RayZ: Gained additional Action Point for this round.");
+        Println("RayZ: Gained additional Action Point for this round.");
     }
 
     public void RayZGainsAd() {
-        Console.WriteLine($"RayZ: gained {RayZConstants.WDamageGain} AD.");
+        Println($"RayZ: gained {RayZConstants.WDamageGain} AD.");
     }
 
     public void RayZBurnedScroll() {
-        Console.WriteLine("RayZ: The scroll has burned out. Nothing happens.");
+        Println("RayZ: The scroll has burned out. Nothing happens.");
+    }
+
+    public void WladymyrPrintPassiveLostBlood(int bloodLost) {
+        Println($"Crimson Pact: Wladymyr lost {bloodLost} blood.");
+    }
+
+    public void WladymyrPrintPassiveGainedAd(int abilityPower) {
+        Println("Crimson Pact: Wladymyr gained 10 AP. Current AP: " + abilityPower);
+    }
+
+    public void WladymyrUsedBlood(int hpCost) {
+        Println("Wladymyr used " + hpCost + " to hp prepare his spell.");
+    }
+
+    public void WladymyrHealed(int hpHealed) {
+        Println("Wladymyr healed himself by " + hpHealed + " hp.");
+    }
+
+    public void WladymyrExchangedAdForHP(int ad, int hp) {
+        Println("Wladymyr exchanged " + ad + " AD for " + hp + " HP.");
+    }
+
+    public void WladymyrGainedAp(int adGained, int currentAd) {
+        Println("Wladymyr gained " + adGained + " AD. Current AD: " + currentAd);
+    }
+
+    public void WladymyrNotEnoughAp() {
+        Println("You don't have enough Ability Power to use this spell.");
     }
 
     //OTHERS
