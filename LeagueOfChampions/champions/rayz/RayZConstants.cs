@@ -22,7 +22,7 @@ public class RayZConstants {
 
     //W
     public const int WDamageGain = 5;
-    public const int WArmorGain = 5;
+    public const int WArmorGain = 2;
     
     
     //E

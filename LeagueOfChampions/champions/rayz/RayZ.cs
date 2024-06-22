@@ -2,17 +2,17 @@
 using LeagueOfChampions.spell;
 
 namespace LeagueOfChampions.champions;
-
+using static RayZConstants;
 public class RayZ : Champion {
     private readonly SubtitlesPrinter _subtitlesPrinter;
 
     public RayZ(SubtitlesPrinter subtitlesPrinter) : base(subtitlesPrinter) {
-        Name = RayZConstants.NAME;
-        MaxHp = RayZConstants.MAX_HP;
-        CurrentHp = RayZConstants.MAX_HP;
-        Armor = RayZConstants.ARMOR;
-        AttackDamage = RayZConstants.ATTACK_DAMAGE;
-        ManaPoints = RayZConstants.MAX_MANA;
+        Name = NAME;
+        MaxHp = MAX_HP;
+        CurrentHp = MAX_HP;
+        Armor = ARMOR;
+        AttackDamage = ATTACK_DAMAGE;
+        ManaPoints = MAX_MANA;
         CurrentManaPoints = ManaPoints;
         _subtitlesPrinter = subtitlesPrinter;
         SpellsExplanation = new RayZSpellsExplanation();
@@ -24,22 +24,22 @@ public class RayZ : Champion {
         return BasicAttack ??=
             new Spell(
                 new SpellDescription(AttackDamage, false, false),
-                RayZConstants.BasicAttackManaCost, () => { });
+                BasicAttackManaCost, () => { });
     }
 
     public override Spell? ProvideQ() {
-        var damage = _isMarkUsed ? RayZConstants.QMarkedDamage : RayZConstants.QBaseDamage;
-        return new Spell(new SpellDescription(damage, false, false), RayZConstants.QManaCost,
+        var damage = _isMarkUsed ? QMarkedDamage : QBaseDamage;
+        return new Spell(new SpellDescription(damage, false, false), QManaCost,
             () => { _isMarkUsed = false; });
     }
 
     public override Spell? ProvideW() {
-        return new Spell(new SpellDescription(), RayZConstants.WManaCost, () => {
+        return new Spell(new SpellDescription(), WManaCost, () => {
             {
                 int randomNumber = MathHelper.RandomInt(1, 6);
                 switch (randomNumber) {
                     case 1:
-                        AttackDamage += RayZConstants.WDamageGain;
+                        AttackDamage += WDamageGain;
                         _subtitlesPrinter.RayZGainsAd();
                         break;
                     case 2:
@@ -47,7 +47,7 @@ public class RayZ : Champion {
                         _subtitlesPrinter.EnemyMarked();
                         break;
                     case 3:
-                        Armor += RayZConstants.WArmorGain;
+                        Armor += WArmorGain;
                         _subtitlesPrinter.RayZGainedArmor();
                         break;
                     case 4:
@@ -71,8 +71,8 @@ public class RayZ : Champion {
     public override Spell? ProvideE() {
         return SpellE ??=
             new Spell(
-                new SpellDescription(RayZConstants.EDamage, false, false),
-                RayZConstants.EManaCost, () => {
+                new SpellDescription(EDamage, false, false),
+                EManaCost, () => {
                     _isMarkUsed = true;
                     ResetCooldown(SpellQ);
                 });
@@ -92,7 +92,7 @@ public class RayZ : Champion {
             new Spell(
                 new SpellDescription(),
                 0, () => {
-                    int gainedAd = MathHelper.RandomInt(1, 5);
+                    var gainedAd = MathHelper.RandomInt(1, 5);
                     AttackDamage += gainedAd;
                     _subtitlesPrinter.RayZPrintPassive(gainedAd);
                 });
